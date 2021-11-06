@@ -115,3 +115,19 @@ body {
     }
   }
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  li {
+    cursor: pointer;
+    margin-left: 20px;
+    padding: 10px;
+    list-style-type: none;
+    color: white;
+    border: 2px solid white;
+  }
+}
