@@ -95,6 +95,11 @@ body {
   color: #ffd80e;
 }
 
+.movie__info__year {
+  color: #ffffff;
+  font-size: 14px;
+}
+
 .movie__info__average {
   position: absolute;
   top: 10px;

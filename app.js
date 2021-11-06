@@ -18,27 +18,10 @@ async function getMovieFunc(url) {
 }
 
 
-
-
-
-
-
-
-function getByClass (rating) {
-  if (rating >= 7) {
-    return 'green'
-  } else if (rating >= 5) {
-     return 'orange'
-  } else  {
-    return 'red'
-  }
-}
-
 const movieData = (data) => {
   const movies = document.querySelector('.movies')
   movies.innerHTML = ''
-
-   data.films.map(item => {
+    data.films.map(item => {
     const movie = document.createElement('div')
     movie.classList.add('movie')
      movie.innerHTML = `
@@ -53,7 +36,11 @@ const movieData = (data) => {
   <div class="movie__info">
     <div class="movie__info__title">${item.nameRu}</div>
     <div class="movie__info__category">${item.genres.map(genres =>  genres.genre + ' ')}</div>
-    <div class="movie__info__average movie__info__average__${getByClass(item.rating)}">${item.rating}</div>
+
+    ${item.rating && `<div class="movie__info__average movie__info__average__${getByClass(item.rating)}"> ${item.rating} </div> 
+    `}
+
+    <div class="movie__info__year">${item.year}</div>
   </div>
     
     `
@@ -62,6 +49,16 @@ const movieData = (data) => {
     
 
   })
+}
+
+function getByClass (rating) {
+  if (rating >= 7) {
+    return 'green'
+  } else if (rating >= 5) {
+     return 'orange'
+  } else  {
+    return 'red'
+  }
 }
 
 
@@ -74,7 +71,6 @@ form.addEventListener('submit', (e) => {
   const apiSearchUrl = `${API_URL_SEARCH}${inputSearch.value}`
   if(inputSearch.value) {
     getMovieFunc(apiSearchUrl)
-
   }
 
  })
