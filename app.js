@@ -15,7 +15,6 @@ async function getMovies (url) {
     }
   }).then( res => res.data)
 
-  console.log(response)
   setMovies(response)
 
 }
@@ -71,6 +70,24 @@ form.addEventListener('submit', (e) => {
 
 
 })
+
+const items = document.querySelectorAll('.pagination li')
+let notesOnPage = 8;
+
+ for (let item of items) {
+    item.addEventListener('click', function () {
+      let pageNum = +this.innerHTML     
+      let url = `https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=${pageNum}`
+      getMovies(url)
+    })
+ }
+
+ 
+   
+
+
+
+
 
 
 
