@@ -1,18 +1,25 @@
-// const axios = require('axios')
 
-const API_KEY = '408e3df2-1ec5-416a-9c91-b340bd84c2ba'
+const API_KEY = '408e3df2-1ec5-416a-9c91-b340bd84c2ba';
+const API_URL_POPULAR = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1';
+const API_URL_SEARCH = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword='
+getMovieFunc(API_URL_POPULAR)
 
-const movieFunc = async () => {
-  const response = await axios.get('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1', {
-  headers: {
-    'X-API-KEY': API_KEY
-  }
-  })
-  movieData(response.data)
-  console.log(response.data)
- 
+
+
+async function getMovieFunc(url) {
+  const response = await axios.get(url, {
+    headers: {
+      'Content-type': 'application/json',
+      'X-API-KEY': API_KEY
+    }
+    })
+    movieData(response.data)
+    console.log(response.data)
 }
-movieFunc()
+
+
+
+
 
 
 
@@ -29,6 +36,7 @@ function getByClass (rating) {
 
 const movieData = (data) => {
   const movies = document.querySelector('.movies')
+  movies.innerHTML = ''
 
    data.films.map(item => {
     const movie = document.createElement('div')
@@ -55,4 +63,21 @@ const movieData = (data) => {
 
   })
 }
+
+
+const form = document.querySelector('form')
+const inputSearch = document.querySelector('.header__content__search')
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const apiSearchUrl = `${API_URL_SEARCH}${inputSearch.value}`
+  if(inputSearch.value) {
+    getMovieFunc(apiSearchUrl)
+
+  }
+
+ })
+
+
 
