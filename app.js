@@ -15,6 +15,8 @@ async function getMovies (url) {
   }).then( res => res.data)
 
   setMovies(response)
+  createMovie(response.films)
+  
 
 }
 
@@ -32,7 +34,7 @@ function setMovies(movieData) {
     class="movie__cover"
   />
    
-    <div class="movie__cover__darkened" data-movie="movie"></div>
+    <div class="movie__cover__darkened" data-id="${item.filmId}"></div>
   </div>
   <div class="movie__info">
     <div class="movie__info__title">${item.nameRu}</div>
@@ -87,72 +89,33 @@ const items = document.querySelectorAll('.pagination li')
  })
 
 
-// const openPopup = document.querySelector('.popup__open')
-// const closePopup = document.querySelector('.popup__close')
-// const popup = document.querySelector('.popup')
-// const popupBg = document.querySelector('.popup__container')
-
-
-
-// function openModal (movieData) {
-//   const popup = document.querySelector('.popup')
-// }
-
-
-// openPopup.addEventListener('click', (event) => {
-//   event.preventDefault()
-//   popup.classList.add('active')
-// })
-
-// closePopup.addEventListener('click', (event) => {
-//   popup.classList.remove('active')
-// })
-
-
-// document.addEventListener('click', event => {
-//   if (event.target === popupBg ) {
-//     popup.classList.remove('active')
-//   } 
-// })
-
-// document.addEventListener('click', event => {
-//   if (event.target.dataset.movie) {
-//     popup.classList.add('active')
-//   } 
-// })
-
-
-
-function _createModal (options) {
+function createModal (options) {
   const popup = document.createElement('div')
   popup.classList.add('popup')
-  popup.insertAdjacentHTML('afterbegin', `
-    <div class="popup__container" data-popup="popup"\>
-          <div class="popup__body">
-            <img src="" alt="" />
-            <div class="movie__info">
-              <div class="movie__info__title">ddkkdkdkdkkdkddkkdkd</div>
-              <div class="movie__info__category">dkdkdkdkkdkdkdkdk</div>
-              <div class="movie__info__average">ddkdkdkdkdkkdkd</div>
-              <div class="movie__info__year">ddkdkdkdkkdkdkdk</div>
-            </div>
-            <div class="popup__close" data-close="close">&#10006</div>
-          </div>
-        </div>
-
-  `)
-
+  popup.insertAdjacentHTML('afterbegin',   
+  ` <div class="popup__container" data-popup="popup">
+  <div class="popup__body" data-body="body">
+    <img src="" alt="" />
+    <div class="movie__info">
+      <div class="movie__info__title">""</div>
+      <div class="movie__info__category">""</div>
+      <div class="movie__info__average">""</div>
+      <div class="movie__info__year">""</div>
+    </div>
+    <div class="popup__close" data-close="close">&#10006</div>
+  </div>
+</div>
+`)
   document.body.appendChild(popup)
   return popup
 
 }
 
 
-
-
 $.modal = function (options) {
 
-  const $modal = _createModal(options)
+  const $modal = createModal(options)
+
   return {
     open() {
       $modal.classList.add('active')
@@ -162,16 +125,30 @@ $.modal = function (options) {
       console.log('close')
       $modal.classList.remove('active')
 
-    }
+    },
+    setContent (html) {
+
+        $modal.querySelector('[data-body]').innerHTML = html
+        
+      },
+    
   }
 }
+const modal = $.modal()
 
-document.addEventListener('click', event => {
-  event.preventDefault()
-  if (event.target.dataset.movie) {
-    modal.open()
-  }
-})
+
+
+function createMovie(movieData) {
+  document.addEventListener('click', event => {
+    event.preventDefault()
+    const id = +event.target.dataset.id
+    const movie = movieData.find(f => f.filmId === id)
+    console.log(id, movie)
+    
+  })
+}
+
+
 
 document.addEventListener('click', event => {
   if (event.target.dataset.close ) {
@@ -179,11 +156,6 @@ document.addEventListener('click', event => {
   }
 })
 
-document.addEventListener('click', event => {
-  if (event.target.dataset.close ) {
-    modal.close()
-  }
-})
 
 document.addEventListener('click', event => {
   if (event.target.dataset.popup ) {
@@ -191,10 +163,15 @@ document.addEventListener('click', event => {
   }
 })
 
+document.addEventListener('click', event => {
+  if (event.target.dataset.body ) {
+  console.log(true)
+  }
+})
 
 
 
-const modal = $.modal()
+
 
 
 
