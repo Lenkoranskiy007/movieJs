@@ -21,16 +21,13 @@ body {
   padding: 16px;
   height: 60px;
   &__logo {
+    padding-left: 15px;
     font-size: 32px;
     text-decoration: none;
     color: #ffffff;
-  }
-
-  &__search {
-    padding: 8px;
-    border: 2px solid #1a191f;
-    border-radius: 5px;
-    outline: none;
+    &:hover {
+      color: #18ffff;
+    }
   }
 }
 
@@ -38,6 +35,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  margin-bottom: 150px;
 }
 
 .movie {
@@ -47,8 +45,8 @@ body {
 }
 
 .movie__cover__inner {
-  position: relative;
   height: 360px;
+  position: relative;
 }
 
 .movie__cover {
@@ -121,6 +119,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  padding-bottom: 50px;
 
   li {
     cursor: pointer;
@@ -129,5 +128,96 @@ body {
     list-style-type: none;
     color: white;
     border: 2px solid white;
+    &:hover {
+      border-color: #18ffff;
+    }
   }
+}
+
+.form {
+  width: 20rem;
+  padding-left: 70px;
+  height: 3rem;
+
+  &__input {
+    width: 250px;
+    height: 40px;
+    border: 2px solid #e1e5ee;
+    border-radius: 0.5rem;
+    padding: 8px;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: white;
+    outline: none;
+    padding: 1.25rem;
+    background: none;
+
+    &:hover {
+      border-color: #adffff;
+    }
+
+    /* Change border when input focus*/
+
+    &:focus {
+      border-color: #18ffff;
+    }
+  }
+
+  &__label {
+    position: absolute;
+    left: 1rem;
+    top: 0.8rem;
+    padding: 0 0.5rem;
+    color: white;
+    cursor: text;
+    transition: top 200ms ease-in, left 200ms ease-in, font-size 200ms ease-in;
+    background-color: #060b23;
+  }
+}
+
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown).form__input:not(:focus) ~ .form__label {
+  top: -0.5rem;
+  font-size: 0.8rem;
+  left: 0.8rem;
+}
+
+.popup {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  z-index: 2;
+
+  &__container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  &__body {
+    margin: auto;
+    width: 440px;
+    height: 460px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 15px 110px 15px;
+    position: relative;
+  }
+
+  &__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 21px;
+    cursor: pointer;
+  }
+}
+
+.popup.active {
+  display: block;
 }

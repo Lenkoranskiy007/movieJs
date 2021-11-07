@@ -8,13 +8,21 @@
     <title>Movie js</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" data-container="container">
       <div class="wrapper">
         <header class="header">
           <div class="header__content">
-            <a class="header__content__logo" href="index.html">Movie App</a>
+            <a id="logo" class="header__content__logo" href="index.html">Movie App</a>
             <form>
-              <input class="header__content__search" type="text" placeholder="Введите название " />
+              <div class="form">
+                <input
+                  type="text"
+                  id="email"
+                  class="form__input"
+                  autocomplete="off"
+                  placeholder="Поиск фильма"
+                />
+              </div>
             </form>
           </div>
         </header>
@@ -34,10 +42,15 @@
           <li>8</li>
           <li>9</li>
           <li>10</li>
+          <li>11</li>
+          <li>12</li>
+          <li>13</li>
         </ul>
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="base.js"></script>
     <script src="app.js"></script>
+    <script src="index.js"></script>
   </body>
 </html>
