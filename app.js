@@ -95,14 +95,6 @@ function createModal (options) {
   popup.insertAdjacentHTML('afterbegin',   
   ` <div class="popup__container" data-popup="popup">
   <div class="popup__body" data-body="body">
-    <img src="" alt="" />
-    <div class="movie__info">
-      <div class="movie__info__title">""</div>
-      <div class="movie__info__category">""</div>
-      <div class="movie__info__average">""</div>
-      <div class="movie__info__year">""</div>
-    </div>
-    <div class="popup__close" data-close="close">&#10006</div>
   </div>
 </div>
 `)
@@ -147,11 +139,12 @@ function createMovieModal(movieData) {
     console.log(id, movie)
     modal.setContent(`
     <img class="modal_img" src="${movie.posterUrlPreview}" alt="${movie.posterUrlPreview}" />
-    <div class="movie__info">
-      <div class="movie__info__title">""</div>
-      <div class="movie__info__category">""</div>
-      <div class="movie__info__average">""</div>
-      <div class="movie__info__year">""</div>
+    <div class="modal__info">
+      <div class="modal__info__title">${movie.nameRu}</div>
+      <div class="modal__info__category">${movie.genres.map(genres => genres.genre)}</div>
+      <div class="modal__info__average modal__info__average__${getByClass(movie.rating)}">${movie.rating}</div>
+      <div class="modal__info__year">${movie.year}</div>
+      <div class="popup__close" data-close="close">&#10006</div>
     </div>
     `)
     modal.open()
