@@ -229,13 +229,18 @@ body {
 
 .popup__body {
   margin: auto;
-  width: 440px;
-  height: 460px;
+  width: 540px;
+  height: 560px;
   background-color: #fff;
   border-radius: 10px;
   text-align: center;
   padding: 100px 15px 110px 15px;
   position: relative;
+}
+
+.popup__body img {
+  width: 200px;
+  height: 200px;
 }
 
 .popup__close {

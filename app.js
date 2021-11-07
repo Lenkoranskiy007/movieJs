@@ -15,7 +15,7 @@ async function getMovies (url) {
   }).then( res => res.data)
 
   setMovies(response)
-  createMovie(response.films)
+  createMovieModal(response.films)
   
 
 }
@@ -138,12 +138,23 @@ const modal = $.modal()
 
 
 
-function createMovie(movieData) {
+
+function createMovieModal(movieData) {
   document.addEventListener('click', event => {
     event.preventDefault()
     const id = +event.target.dataset.id
     const movie = movieData.find(f => f.filmId === id)
     console.log(id, movie)
+    modal.setContent(`
+    <img class="modal_img" src="${movie.posterUrlPreview}" alt="${movie.posterUrlPreview}" />
+    <div class="movie__info">
+      <div class="movie__info__title">""</div>
+      <div class="movie__info__category">""</div>
+      <div class="movie__info__average">""</div>
+      <div class="movie__info__year">""</div>
+    </div>
+    `)
+    modal.open()
     
   })
 }
